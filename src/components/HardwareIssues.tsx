@@ -15,7 +15,7 @@ import {
   X,
   Filter,
 } from "lucide-react";
-import { type SheetPayload } from "../services/googleSheets";
+import { type SheetPayload } from "../types"; // ✅ Fixed import path
 import ExportButton from "./ExportButton";
 
 interface HardwareIssuesProps {
@@ -628,7 +628,7 @@ export default function HardwareIssues({ data }: HardwareIssuesProps) {
               </tr>
             </thead>
             <tbody>
-              {worst10.map((s, i) => (
+              {worst10.map((s: { row: Row; avgCa: number }, i: number) => (
                 <tr key={s.row["Site ID"] + i} className="border-b border-slate-700/50 hover:bg-slate-700/30">
                   <td className="py-3 px-2 text-center text-slate-500">{i + 1}</td>
                   <td className="py-3 px-3 text-cyan-300 font-mono">{s.row["Site ID"]}</td>
@@ -686,7 +686,7 @@ export default function HardwareIssues({ data }: HardwareIssuesProps) {
               </tr>
             </thead>
             <tbody>
-              {filteredRows.slice(0, 50).map((row, i) => (
+              {filteredRows.slice(0, 50).map((row: Row, i: number) => (
                 <tr key={row["Site ID"] + i} className="border-b border-slate-700/50 hover:bg-slate-700/30">
                   <td className="py-2.5 px-3 text-cyan-300 font-mono whitespace-nowrap">{row["Site ID"]}</td>
                   <td className="py-2.5 px-3 text-slate-300 whitespace-nowrap">{row["Revenue Category"]}</td>
